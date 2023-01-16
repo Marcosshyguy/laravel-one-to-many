@@ -35,7 +35,7 @@
             </div>
 
             <div class="mb-2">
-                <label for="description">Description</label>
+                <label for="description">Descrizione</label>
                 <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description"
                     rows="10">{{ old('description', $project->description) }}</textarea>
                 @error('description')
@@ -44,6 +44,24 @@
                     </div>
                 @enderror
 
+            </div>
+
+            <div class="mb-2">
+                <label for="type">Tipo di progetto</label>
+                <div>
+                    <select name="type_id" id="type" class="form-select @error('type') is-invalid @enderror">
+                        <option value="">Seleziona</option>
+                        @foreach ($typeOfproject as $type)
+                            <option value="{{ $type->id }}" @selected($project->type?->id == $type->id)>{{ $type->project_type }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('type')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
             </div>
 
 

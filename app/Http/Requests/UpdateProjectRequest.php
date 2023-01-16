@@ -25,6 +25,7 @@ class UpdateProjectRequest extends FormRequest
     public function rules()
     {
         return [
+            'type_id' => 'nullable',
             'title' => 'required|min:5',
             'description' => 'bail|required|min:5|max:300',
             'production_date' => 'nullable',
