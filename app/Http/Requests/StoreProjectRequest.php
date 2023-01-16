@@ -27,11 +27,13 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
+            'type_id' => 'nullable',
             'title' => 'required|min:5',
             'description' => 'bail|required|min:5|max:300',
             'production_date' => 'nullable',
             'languages_used' => 'required',
-            'new_image' => 'nullable|image|max:50000'
+            'new_image' => 'nullable|image|max:50000',
+
         ];
     }
 

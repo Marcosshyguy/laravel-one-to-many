@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Type;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -32,8 +33,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $type = new Type();
-        return view('admin.projects.create', compact('type'));
+        $typeOfproject = Type::all();
+        return view('admin.projects.create', compact('typeOfproject'));
     }
 
     /**
@@ -51,7 +52,7 @@ class ProjectController extends Controller
         if ($request->hasFile('new_image')) {
             $addProject['new_image'] = Storage::put('images', $request->new_image);
         };
-
+        $addProject['user_id'] = Auth::id();
         $project = Project::create($addProject);
         return redirect()->route('admin.projects.index')->with('projectAddedSuccessfully', 'Progetto aggiunto con successo');
     }
