@@ -14,6 +14,12 @@
         <p>Ultimo aggiornamento: {{ $project->production_date }}</p>
         <p>Descrizione: {{ $project->description }}</p>
         <p>Linguaggi usati: {{ $project->languages_used }}</p>
+        @if ($project->type?->project_type)
+            <p>Tipo di progetto: {{ $project->type->project_type }}</p>
+        @endif
+        @if ($project->user?->name)
+            <p>Creato da: {{ $project->user->name }}</p>
+        @endif
         <p>Immagine:</p>
         <div>
             @if ($project->new_image)
